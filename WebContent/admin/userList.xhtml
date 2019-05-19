@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/components/homepagetemplate.xhtml">
+	<h:head>
+		<title>User Information</title>
+	</h:head>
+	<ui:define name="body" appendTo="@(body)">
+		<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
+
+		<p:commandLink value="Add user"
+			oncomplete="PF('AddUserDialog').show()" update=":add:addUserDialog">
+			<h:outputText value="Add User" style="margin:0 auto;" />
+		</p:commandLink>
+		<h:form id="form">
+			<p:dataTable var="u" value="#{userbean.users}" paginator="true"
+				style="margin-bottom:20px" id="userss" rows="10"
+				emptyMessage="No records found !">
+				<p:messages id="messages" />
+				<p:column headerText="Id">
+					<h:outputText value="#{u.id}" />
+				</p:column>
+				<p:column headerText="First Name">
+					<h:outputText value="#{u.name}" />
+				</p:column>
+				<p:column headerText="Last Name">
+					<h:outputText value="#{u.surname}" />
+				</p:column>
+				<p:column headerText="Username">
+					<h:outputText value="#{u.username}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{u.email}" />
+				</p:column>
+				<p:column headerText="Delete User">
+					<p:commandLink action="#{userbean.deleteUser}"
+						update="form:userss,:growl">
+						<i class="fa fa-trash w3-xlarge" style="color: #c43636;"></i>
+						<f:setPropertyActionListener value="#{u}"
+							target="#{userbean.userDelete}" />
+						<p:confirm header="Confirm"
+							message="Do you want to delete this user?" icon="ui-icon-alert" />
+					</p:commandLink>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Confirm" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							update="userss" style="color: #c43636;" />
+						<p:commandButton value="Cancel" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close"
+							update="userss" style="color: #c43636;" />
+					</p:confirmDialog>
+				</p:column>
+				<p:column headerText="Update User">
+					<p:commandLink oncomplete="PF('EditUserDialog').show()"
+						update=":form2:editUserDialog ">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{userbean.update}" />
+						<i class="fa fa-edit w3-xlarge" style="color: #c43636;"></i>
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="Role">
+					<p:commandLink oncomplete="PF('RoleDialog').show()"
+						update=":roleform:roleDialog ">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{userbean.update}" />
+						<h:outputText class="fa fa-search w3-xlarge"
+							style="color: #c43636;" />
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="Update Password">
+					<p:commandLink oncomplete="PF('EditPasswordDialog').show()"
+						update=":form3:editPasswordDialog ">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{userbean.updatepass}" />
+						<i class="fa fa-edit w3-xlarge" style="color: #c43636;"></i>
+
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="View more">
+					<p:commandLink oncomplete="PF('DetailDialog').show()"
+						update=":detail:detailDialog ">
+						<f:setPropertyActionListener value="#{u}"
+							target="#{userbean.update}" />
+						<h:outputText class="fa fa-search w3-xlarge"
+							style="color: #c43636;" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<ui:include src="updateUser.xhtml"></ui:include>
+		<ui:include src="userPassword.xhtml"></ui:include>
+		<ui:include src="addUser.xhtml"></ui:include>
+		<ui:include src="displayRoles.xhtml"></ui:include>
+		<ui:include src="view.xhtml"></ui:include>
+
+
+	</ui:define>
+</ui:composition>
+</html>

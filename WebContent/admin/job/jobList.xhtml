@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Jobs available</title>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
+	<h:form id="form">
+		<p:dataGrid id="jobs" var="j" value="#{applyBean.jobs}" columns="3"
+			layout="grid" width="400">
+			<p:panel header="#{j.title}">
+				<p:graphicImage name="/resources/job/#{j.jobCategory}.jpg"
+					style="align:center" width="100" height="100" />
+				<f:facet name="header">
+					<h:outputText value="#{j.title}" />
+				</f:facet>
+				<h:link outcome="viewJob.xhtml" value="More Details "
+					includeViewParams="true">
+					<f:param name="id" value="#{j.idjob}" />
+					<f:param name="title" value="#{j.title}" />
+				</h:link>
+				<br />
+				<br />
+				<p:growl id="messages" showDetail="true" />
+
+				<p:fileUpload value="#{applyBean.file}" mode="simple"
+					skinSimple="true" />
+
+				<br />
+				<br />
+
+				<p:commandLink value="Submit" ajax="false"
+					action="#{applyBean.apply}" />
+			</p:panel>
+		</p:dataGrid>
+	</h:form>
+</h:body>
+</html>
