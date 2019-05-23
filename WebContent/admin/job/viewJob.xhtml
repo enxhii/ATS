@@ -6,11 +6,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-	<f:viewParam name="j" value="#{applyBean.job.job_type}" />
+	<f:viewParam name="idjob" value="#{applyBean.job.job_type}" />
 
 </f:metadata>
 <h:body>
-		<h:outputText value="#{jobDetails.job.title}">
+		<h:outputText value="#{applyBean.job.title}">
 		</h:outputText>
 </h:body>
 </html>

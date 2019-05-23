@@ -13,6 +13,7 @@ C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\managed_bean\JobDetails.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\managed_bean\RegisterBean.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\serviceImpl\JobServiceImpl.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\model\App.java
+C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\serviceImpl\CvServiceImpl.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\model\JobCategory.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\service\RoleService.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\converters\BenefitConverter.java
@@ -21,8 +22,10 @@ C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\dao\QualificationDao.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\model\Benefit.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\managed_bean\LoginManagedBean.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\model\Job.java
+C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\dao\ApplyDao.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\managed_bean\JobBean.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\managed_bean\RoleEnum.java
+C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\service\CvService.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\model\Address.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\encryption\PasswordEncryptor.java
 C:\Users\pc\eclipse-workspace\ATS\src\main\java\ats\converters\CategoryConverter.java

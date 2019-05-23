@@ -1,15 +1,15 @@
 package ats.managed_bean;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-
+import javax.faces.context.FacesContext;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import ats.model.CV;
 import ats.model.Job;
 import ats.service.CvService;
@@ -21,32 +21,44 @@ public class ApplyBean {
 
 	@ManagedProperty(value = "#{jobServiceImpl}")
 	private JobService jobService;
-	@ManagedProperty(value = "#{jobDetails}")
-	private JobDetails jobDetails;
+
 	@ManagedProperty(value = "#{cvServiceImpl}")
 	private CvService cvService;
 	private List<Job> jobs;
 	private Job job;
 	final static Logger LOGGER = LogManager.getLogger(ApplyBean.class);
-
 	private CV file;
 
 	@PostConstruct
 	public void init() {
 		jobs = jobService.jobList();
 		job = new Job();
-//		job = jobService.getJobById(jobDetails.getJob().getIdjob()); ->Kjo me jep null //edhekur eprovoj te Job details me scope Session
+		job = jobService.getJobById(Integer
+				.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idjob")));
+		// job.setIdjob(Integer
+		// .valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("jobid")));
 
+		LOGGER.debug(job.getIdjob() + "Is this null,why?Please compile and run andgoand fucking fucking gooo");
+		file = new CV();
+	}
+
+	public String getId() {
+		FacesContext fContext = FacesContext.getCurrentInstance();
+
+		Map<String, String> params = fContext.getExternalContext().getRequestParameterMap();
+		LOGGER.debug(params.get("idjob"));
+		String id = params.get("idjob");
+		LOGGER.debug(id);
+		return id;
 	}
 
 	public void apply() {
-		job = jobService.getJobById(jobDetails.getJob().getIdjob());
-		cvService.addCv(file, job);
-	}
+		job.setIdjob((Integer.valueOf(
+				FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idjob"))));
+		LOGGER.debug(job.getIdjob() + "Is this null,why?Please compile and run andgoand fucking fucking gooo");
 
-	public void getId() {
 		LOGGER.debug(job.getIdjob());
-
+		cvService.addCv(file, job);
 	}
 
 	public JobService getJobService() {
@@ -73,14 +85,6 @@ public class ApplyBean {
 		this.job = job;
 	}
 
-	public JobDetails getJobDetails() {
-		return jobDetails;
-	}
-
-	public void setJobDetails(JobDetails jobDetails) {
-		this.jobDetails = jobDetails;
-	}
-
 	public CvService getCvService() {
 		return cvService;
 	}
@@ -95,10 +99,6 @@ public class ApplyBean {
 
 	public CV getFile() {
 		return file;
-	}
-
-	public void setFile(CV file) {
-		this.file = file;
 	}
 
 }
