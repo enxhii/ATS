@@ -11,30 +11,19 @@
 	<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
 	<h:form id="form">
 		<p:dataGrid id="jobs" var="j" value="#{applyBean.jobs}" columns="3"
-			layout="grid" width="400">
-			<p:panel header="#{j.title}">
-				<p:graphicImage name="/resources/job/#{j.jobCategory}.jpg"
-					style="align:center" width="100" height="100" />
-				<f:facet name="header">
-					<h:outputText value="#{j.title}" />
-				</f:facet>
-				<h:link outcome="viewJob.xhtml" value="More Details "
-					includeViewParams="true">
-					<f:param  name="idjob" value="#{j.idjob}" />
-					<f:param  name="title" value="#{j.title}" />
-				</h:link>
-				<br />
-				<br />
-				<p:growl id="messages" showDetail="true" />
-
-				<p:fileUpload value="#{applyBean.file}" mode="simple"
-					skinSimple="true" />
-
-				<br />
-				<br />
-
-				<p:commandLink value="Submit" ajax="false"
-					action="#{applyBean.apply}" />
+			layout="grid" width="400" paginator="true">
+			<p:panel header="#{j.title}" style="text-align:center">
+					<p:graphicImage name="/job/#{j.title}.jpg" />
+					
+					<br />
+					<br />
+					<h:link outcome="/resources/adv/index.xhtml" value="More Details "
+						includeViewParams="true">
+						<f:param name="idjob" value="#{j.idjob}" />
+						<f:param name="title" value="#{j.title}" />
+					</h:link>
+					<br />
+					<br />
 			</p:panel>
 		</p:dataGrid>
 	</h:form>

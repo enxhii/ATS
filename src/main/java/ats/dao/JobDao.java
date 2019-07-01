@@ -62,7 +62,7 @@ public class JobDao {
 
 	}
 
-	public List<Job> jobList(){
+	public List<Job> jobList() {
 		try {
 			LOGGER.debug("Getting result from Job ");
 			String sql = "SELECT j FROM Job  j";
@@ -70,18 +70,24 @@ public class JobDao {
 			@SuppressWarnings("unchecked")
 			List<Job> jobs = entityManager.createQuery(sql).getResultList();
 			return jobs;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			LOGGER.info(e);
-			e.printStackTrace();		}
+			e.printStackTrace();
+		}
 		return null;
 	}
-	
-public Job getJobById(Integer id) {
-	String query = " select j from Job j  where j.idjob=?1 ";
+
+	public Job getJobById(Integer id) {
+		try {
+			String query = " select j from Job j  where j.idjob=?1 ";
+			LOGGER.debug(entityManager.createQuery(query, Job.class).setParameter(1, id).getSingleResult());
 			return entityManager.createQuery(query, Job.class).setParameter(1, id).getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-
-}
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
@@ -89,13 +95,14 @@ public Job getJobById(Integer id) {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
+
 	public List<Benefit> listAll() {
 		try {
 			LOGGER.debug("Getting result from benefit");
 			String sql = "SELECT b FROM Benefit b";
 			LOGGER.debug("Fetching result from benefits");
 			@SuppressWarnings("unchecked")
-			List<Benefit> list =  entityManager.createQuery(sql).getResultList();
+			List<Benefit> list = entityManager.createQuery(sql).getResultList();
 			return list;
 		} catch (Exception e) {
 			LOGGER.info(e);

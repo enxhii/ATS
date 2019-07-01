@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
@@ -25,7 +25,7 @@ import ats.model.User;
 import ats.service.JobService;
 
 @ManagedBean(name = "jobbean")
-@ViewScoped
+@RequestScoped
 public class JobBean {
 	@ManagedProperty(value = "#{jobServiceImpl}")
 	private JobService jobService;
@@ -98,7 +98,12 @@ public class JobBean {
 
 		jobService.addJob(job, user, address, skills, qualifications, selectedBenefit);
 		addMessage("Job " + "  " + job.getTitle() + "  " + " was publish  succesfully");
-
+		job = new Job();
+		address = new Address();
+		skill=new Skill();
+		skills = new ArrayList<>();
+		qualifications = new Qualifications();
+		selectedBenefit = new ArrayList<>();
 	}
 
 	public Benefit getBenefit(Integer id) {
@@ -283,6 +288,5 @@ public class JobBean {
 	private RequestContext requestContext() {
 		return RequestContext.getCurrentInstance();
 	}
-
 
 }

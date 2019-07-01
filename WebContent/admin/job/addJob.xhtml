@@ -4,12 +4,16 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-<title><ui:insert name="title">Add a Job</ui:insert></title>
+	<title><ui:insert name="title">Add a Job</ui:insert></title>
+	<link href="resources/css/stylerl.css" rel="stylesheet" type="text/css" />
+	<link
+		href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800"
+		rel="stylesheet" type="text.css" />
 </h:head>
 
 <h:body>
-
-		<p:growl id="growl" showDetail="true"  life="5000" />
+	<h:outputStylesheet library="css" name="input.css"></h:outputStylesheet>
+	<p:growl id="growl" showDetail="true" life="5000" />
 
 	<h:form id="form">
 
@@ -17,7 +21,7 @@
 
 
 		<p:accordionPanel multiple="true" id="A">
-			<p:tab title="Job Details" >
+			<p:tab title="Job Details">
 				<h:panelGrid id="grid" columns="2" cellpadding="10">
 					<h:outputText value=" Job Title : " />
 					<p:inputText id="title" value="#{jobbean.job.title}"
@@ -37,10 +41,10 @@
 						value="#{jobbean.job.description}" width="600" />
 
 
-					<p:commandButton   value="Clear" type="button"
+					<p:commandButton value="Clear" type="button"
 						onclick="PF('editorWidget').clear();" icon="pi pi-times" />
 					<br></br>
-						
+
 					<h:outputText value=" Job Address : " />
 					<h:outputText value=" Country : " />
 
@@ -59,7 +63,7 @@
 				</h:panelGrid>
 
 			</p:tab>
-			<p:tab title="Add Skills" >
+			<p:tab title="Add Skills">
 				<h:panelGrid id="gridskill" columns="2" cellpadding="10">
 					<h:outputText value=" Enter Skill : " />
 					<br></br>
@@ -83,8 +87,8 @@
 					</p:selectOneMenu>
 				</h:panelGrid>
 			</p:tab>
-			
-			<p:tab title="Qualification and Benefits" >
+
+			<p:tab title="Qualification and Benefits">
 				<h:panelGrid id="grid2" columns="2" cellpadding="10">
 					<p:selectOneMenu id="education"
 						value="#{jobbean.qualifications.educationLevel}"
@@ -100,7 +104,7 @@
 						requiredMessage=" Specialization is required and must have 3 or more letters.">
 						<f:validateLength minimum="3" maximum="30" />
 					</p:inputText>
-					
+
 					<p:selectOneMenu id="jobtype" value="#{jobbean.job.job_type}"
 						style="width:150px">
 						<f:selectItem itemLabel="Select Job Type " itemValue=""
@@ -120,10 +124,11 @@
 			</p:tab>
 		</p:accordionPanel>
 
-		<p:commandButton value="Publish Job" id="button" action="#{jobbean.addJob}"
-			update="A"
-			style=" background: #c43636; color: white;">
-			</p:commandButton>
+		<p:commandButton value="Publish Job" id="button"
+			action="#{jobbean.addJob}" update=":form,:growl"
+			style="background: #c43636; color: white;">
+			<p:resetInput target="form" />
+		</p:commandButton>
 
 
 	</h:form>
