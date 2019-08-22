@@ -50,7 +50,7 @@ public class ApplyBean {
 	private Qualifications qualifications;
 
 	private static final String PF_ADDFILE_DIALOG_HIDE = "PF('AddFileDialog').hide()";
-
+	private static final String PF_ADDFILE_DIALOG_SHOW = "PF('AddFileDialog').show()";
 
 	@PostConstruct
 	public void init() {
@@ -77,6 +77,9 @@ public class ApplyBean {
 
 	}
 
+	public void onLinkClick(){
+	    executeScript(PF_ADDFILE_DIALOG_SHOW);
+	}
 	public UploadedFile getUpload() {
 		return upload;
 	}

@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
-encoding//WebContent/index.xhtml=UTF-8
+encoding//WebContent/job/job-single.xhtml=UTF-8
+encoding//WebContent/job/login.xhtml=UTF-8
+encoding//WebContent/resources/stable/index.xhtml=UTF-8
 encoding//WebContent/resources/stable/services.xhtml=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8

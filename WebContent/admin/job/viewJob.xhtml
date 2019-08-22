@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 
-<html lang="" xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition lang="" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<f:metadata>
-		<f:viewParam name="idjob" value="#{applyBean.idjob}" />
-		<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
 
-	</f:metadata>
-</h:head>
-<h:body>
+	<h:head>
+		<f:metadata>
+			<f:viewParam name="idjob" value="#{applyBean.idjob}" />
+			<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
+
+		</f:metadata>
+	</h:head>
+
 	<h:form id="form" enctype="multipart/form-data">
-		<h:outputText value="#{applyBean.job.title}">
-		</h:outputText>
-		<p:messages id="messag" />
 
-		<p:fileUpload id="up" fileUploadListener="#{applyBean.apply}"
-			value="#{applyBean.upload}" mode="advanced" skinSimple="true"
-			required="true"
-			requiredMessage="Please insert your CV to apply for this position"
-			sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(pdf|doc|txt)$/"
-			update="up" invalidFileMessage="Invalid file type"
-			messageTemplate="Can't upload file   #{applyBean.file.name} It must be a .doc/pdf/txt file" />
+		<p:dialog id="addFileDialog" header="Apply Now" appendToBody="true"
+			widgetVar="AddFileDialog" showEffect="fade" hideEffect="fade">
+			<h:outputText value="#{applyBean.job.title}">
+			</h:outputText>
+			<p:messages id="messag" />
 
+			<p:fileUpload id="up" fileUploadListener="#{applyBean.apply}"
+				value="#{applyBean.upload}" mode="advanced" skinSimple="true"
+				required="true"
+				requiredMessage="Please insert your CV to apply for this position"
+				sizeLimit="100000" fileLimit="1"
+				allowTypes="/(\.|\/)(pdf|doc|txt)$/" update="up"
+				invalidFileMessage="Invalid file type"
+				messageTemplate="Can't upload file   #{applyBean.file.name} It must be a .doc/pdf/txt file" />
+		</p:dialog>
 	</h:form>
-</h:body>
-</html>
+</ui:composition>

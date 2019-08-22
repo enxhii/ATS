@@ -24,7 +24,7 @@ public class JobServiceImpl implements JobService {
 	private JobDao jobdao;
 
 	@Override
-	public void addJob(Job entity, User user ,Address address, List<Skill> skills, Qualifications qualifications,
+	public void addJob(Job entity, User user ,Address address, Skill skills, Qualifications qualifications,
 			List<Benefit> benefits) {
 		try {
 			jobdao.addJob(entity, user ,address, skills, qualifications, benefits);

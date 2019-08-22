@@ -24,7 +24,7 @@ public class JobDao {
 	private EntityManager entityManager;
 	final static Logger LOGGER = LogManager.getLogger(JobDao.class);
 
-	public void addJob(Job job, User user, Address address, List<Skill> skills, Qualifications qualifications,
+	public void addJob(Job job, User user, Address address, Skill skills, Qualifications qualifications,
 			List<Benefit> benefits) {
 		try {
 			job.setUser(user);

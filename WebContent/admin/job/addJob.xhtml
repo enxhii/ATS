@@ -3,136 +3,144 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title><ui:insert name="title">Add a Job</ui:insert></title>
-	<link href="resources/css/stylerl.css" rel="stylesheet" type="text/css" />
-	<link
-		href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800"
-		rel="stylesheet" type="text.css" />
-</h:head>
+<ui:composition template="/components/homepagetemplate.xhtml">
 
-<h:body>
-	<h:outputStylesheet library="css" name="input.css"></h:outputStylesheet>
-	<p:growl id="growl" showDetail="true" life="5000" />
+	<h:head>
+		<title><ui:insert name="title">Add a Job</ui:insert></title>
 
-	<h:form id="form">
-
-		<h3 style="margin-top: 0">Add a new Job</h3>
+	</h:head>
 
 
-		<p:accordionPanel multiple="true" id="A">
-			<p:tab title="Job Details">
-				<h:panelGrid id="grid" columns="2" cellpadding="10">
-					<h:outputText value=" Job Title : " />
-					<p:inputText id="title" value="#{jobbean.job.title}"
-						required="true"
-						requiredMessage="Your First name is required and must have 3 or more letters.">
-						<f:validateLength minimum="2" maximum="20" />
-					</p:inputText>
-					<h:outputText value=" Job Category : " />
-					<p:selectOneMenu value="#{jobbean.job.jobCategory}"
-						label="Select Job Category" converter="categoryConverter"
-						update="form">
-						<f:selectItems value="#{jobbean.categoryList}" var="c"
-							itemLabel="#{c.type}" itemValue="#{c}" />
-					</p:selectOneMenu>
-					<h:outputText value=" Job Description : " />
-					<p:editor id="editor" widgetVar="editorWidget"
-						value="#{jobbean.job.description}" width="600" />
+	<ui:define name="body" appendTo="@(body)">
+
+		<h:outputStylesheet library="css" name="input.css"></h:outputStylesheet>
+		<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
+
+		<p:growl id="growl" showDetail="true" life="5000" />
+
+		<h:form id="form">
+
+			<h3 style="margin-top: 0">Post a Job</h3>
 
 
-					<p:commandButton value="Clear" type="button"
-						onclick="PF('editorWidget').clear();" icon="pi pi-times" />
-					<br></br>
+			<p:accordionPanel multiple="true" id="A"
+				style="background: #c43636 !important ; color: white;width:80%;">
+				<p:tab title="Job Details"
+					style="background: #c43636; color: white;" id="tabt">
+					<h:panelGrid id="grid" columns="2" cellpadding="10">
 
-					<h:outputText value=" Job Address : " />
-					<h:outputText value=" Country : " />
-
-					<p:inputText id="country" value="#{jobbean.address.country}"
-						required="true"
-						requiredMessage=" Country name is required and must have 3 or more letters.">
-						<f:validateLength minimum="3" maximum="20" />
-					</p:inputText>
-					<h:outputText value=" City : " />
-
-					<p:inputText id="city" value="#{jobbean.address.city}"
-						required="true"
-						requiredMessage=" City name is required and must have 3 or more letters.">
-						<f:validateLength minimum="3" maximum="20" />
-					</p:inputText>
-				</h:panelGrid>
-
-			</p:tab>
-			<p:tab title="Add Skills">
-				<h:panelGrid id="gridskill" columns="2" cellpadding="10">
-					<h:outputText value=" Enter Skill : " />
-					<br></br>
-
-					<p:inputText id="name" value="#{jobbean.skill.name}"
-						required="true"
-						requiredMessage=" Skill name  is required and must have 3 or more letters.">
-						<f:validateLength minimum="3" maximum="20" />
-					</p:inputText>
-					<p:selectOneMenu id="level"
-						value="#{jobbean.skill.experienceLevel}" style="width:150px">
-						<f:selectItem itemLabel="Select Experience Level" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{jobbean.experienceLevel}" />
-					</p:selectOneMenu>
-					<p:selectOneMenu id="strength"
-						value="#{jobbean.skill.strengthLevel}" style="width:150px">
-						<f:selectItem itemLabel="Select Strength Level" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{jobbean.strengthLevel}" />
-					</p:selectOneMenu>
-				</h:panelGrid>
-			</p:tab>
-
-			<p:tab title="Qualification and Benefits">
-				<h:panelGrid id="grid2" columns="2" cellpadding="10">
-					<p:selectOneMenu id="education"
-						value="#{jobbean.qualifications.educationLevel}"
-						style="width:150px">
-						<f:selectItem itemLabel="Select Education Level" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{jobbean.educationLevel}" />
-					</p:selectOneMenu>
-					<h:outputText value=" Enter Specialization : " />
-
-					<p:inputText id="specialization"
-						value="#{jobbean.qualifications.specialization}" required="true"
-						requiredMessage=" Specialization is required and must have 3 or more letters.">
-						<f:validateLength minimum="3" maximum="30" />
-					</p:inputText>
-
-					<p:selectOneMenu id="jobtype" value="#{jobbean.job.job_type}"
-						style="width:150px">
-						<f:selectItem itemLabel="Select Job Type " itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{jobbean.jobtype}" />
-					</p:selectOneMenu>
-
-					<h:outputText value=" Benefits : " />
-					<p:selectCheckboxMenu id="multiple" label="Select Benefits"
-						value="#{jobbean.selectedBenefit}" showCheckbox="true"
-						multiple="true" converter="benefitConverter" filter="true"
-						filterMatchMode="startsWith" panelStyle="width:250px">
-						<f:selectItems value="#{jobbean.list}" var="b"
-							itemLabel="#{b.name}" itemValue="#{b}" />
-					</p:selectCheckboxMenu>
-				</h:panelGrid>
-			</p:tab>
-		</p:accordionPanel>
-
-		<p:commandButton value="Publish Job" id="button"
-			action="#{jobbean.addJob}" update=":form,:growl"
-			style="background: #c43636; color: white;">
-			<p:resetInput target="form" />
-		</p:commandButton>
+						<h:outputText value=" Job Position: " />
+						<p:inputText id="title" value="#{jobbean.job.title}"
+							required="true"
+							requiredMessage="Job position is required and must have 3 or more letters.">
+							<f:validateLength minimum="2" maximum="20" />
+						</p:inputText>
+						<h:outputText value=" Job Category : " />
+						<p:selectOneMenu value="#{jobbean.job.jobCategory}"
+							label="Select Job Category" converter="categoryConverter"
+							update="form">
+							<f:selectItems value="#{jobbean.categoryList}" var="c"
+								itemLabel="#{c.type}" itemValue="#{c}" />
+						</p:selectOneMenu>
+						<h:outputText value=" Job Description : " />
+						<p:editor id="editor" widgetVar="editorWidget"
+							value="#{jobbean.job.description}" width="600" />
 
 
-	</h:form>
+						<p:commandButton value="Clear" type="button"
+							onclick="PF('editorWidget').clear();" icon="pi pi-times"
+							style="background: #c43636; color: white;" />
+						<br></br>
 
-</h:body>
+						<h:outputText value=" Job Address : " />
+						<h:outputText value=" Country : " />
 
+						<p:inputText id="country" value="#{jobbean.address.country}"
+							required="true"
+							requiredMessage=" Country name is required and must have 3 or more letters.">
+							<f:validateLength minimum="3" maximum="20" />
+						</p:inputText>
+						<h:outputText value=" City : " />
+
+						<p:inputText id="city" value="#{jobbean.address.city}"
+							required="true"
+							requiredMessage=" City name is required and must have 3 or more letters.">
+							<f:validateLength minimum="3" maximum="20" />
+						</p:inputText>
+					</h:panelGrid>
+
+				</p:tab>
+				<p:tab title="Add Skills" style="background: #c43636; color: white;">
+					<h:panelGrid id="gridskill" columns="2" cellpadding="10">
+						<h:outputText value=" Enter Skill : " />
+						<br></br>
+
+						<p:inputText id="name" value="#{jobbean.skill.name}"
+							required="true"
+							requiredMessage=" Skill name  is required and must have 3 or more letters.">
+							<f:validateLength minimum="3" maximum="20" />
+						</p:inputText>
+						<p:selectOneMenu id="level"
+							value="#{jobbean.skill.experienceLevel}" style="width:150px">
+							<f:selectItem itemLabel="Select Experience Level" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{jobbean.experienceLevel}" />
+						</p:selectOneMenu>
+						<p:selectOneMenu id="strength"
+							value="#{jobbean.skill.strengthLevel}" style="width:150px">
+							<f:selectItem itemLabel="Select Strength Level" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{jobbean.strengthLevel}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab title="Qualification and Benefits"
+					style="background: #c43636; color: white; width:80%;">
+					<h:panelGrid id="grid2" columns="2" cellpadding="10">
+						<p:selectOneMenu id="education"
+							value="#{jobbean.qualifications.educationLevel}"
+							style="width:150px">
+							<f:selectItem itemLabel="Select Education Level" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{jobbean.educationLevel}" />
+						</p:selectOneMenu>
+						<h:outputText value=" Enter Specialization : " />
+
+						<p:inputText id="specialization"
+							value="#{jobbean.qualifications.specialization}" required="true"
+							requiredMessage=" Specialization is required and must have 3 or more letters.">
+							<f:validateLength minimum="3" maximum="30" />
+						</p:inputText>
+
+						<p:selectOneMenu id="jobtype" value="#{jobbean.job.job_type}"
+							style="width:150px">
+							<f:selectItem itemLabel="Select Job Type " itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{jobbean.jobtype}" />
+						</p:selectOneMenu>
+
+						<h:outputText value=" Benefits : " />
+						<p:selectCheckboxMenu id="multiple" label="Select Benefits"
+							value="#{jobbean.selectedBenefit}" showCheckbox="true"
+							multiple="true" converter="benefitConverter" filter="true"
+							filterMatchMode="startsWith" panelStyle="width:250px">
+							<f:selectItems value="#{jobbean.list}" var="b"
+								itemLabel="#{b.name}" itemValue="#{b}" />
+						</p:selectCheckboxMenu>
+					</h:panelGrid>
+				</p:tab>
+			</p:accordionPanel>
+
+			<p:commandButton value="Publish Job" id="button"
+				action="#{jobbean.addJob}" update=":form,:growl" icon="pi pi-save"
+				style="background: #c43636; color: white;">
+				<p:resetInput target="form" />
+			</p:commandButton>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
 </html>

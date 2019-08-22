@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
@@ -32,13 +31,12 @@ public class JobBean {
 
 	@ManagedProperty(value = "#{userProfileBean}")
 	private UserProfileBean userProfileBean;
-
+	
 	private Job job;
 	private Address address;
 	private List<Benefit> selectedBenefit;
 	private List<Benefit> list;
 	private Skill skill;
-	private List<Skill> skills;
 	private Qualifications qualifications;
 	private Benefit benefit;
 	private User user;
@@ -51,14 +49,14 @@ public class JobBean {
 
 	@PostConstruct
 	public void init() {
-		skill = new Skill();
+
 		user = new User();
 		job = new Job();
+		skill = new Skill();
 		address = new Address();
 		qualifications = new Qualifications();
 		selectedBenefit = jobService.listAll();
 		list = jobService.listAll();
-		skills = new ArrayList<Skill>();
 		benefit = new Benefit();
 		experienceLevel = new ArrayList<>();
 		strengthLevel = new ArrayList<>();
@@ -96,12 +94,11 @@ public class JobBean {
 	public void addJob() {
 		user.setId(userProfileBean.getUser().getId());
 
-		jobService.addJob(job, user, address, skills, qualifications, selectedBenefit);
-		addMessage("Job " + "  " + job.getTitle() + "  " + " was publish  succesfully");
+		jobService.addJob(job, user, address, skill, qualifications, selectedBenefit);
+		
 		job = new Job();
 		address = new Address();
-		skill=new Skill();
-		skills = new ArrayList<>();
+		skill = new Skill();
 		qualifications = new Qualifications();
 		selectedBenefit = new ArrayList<>();
 	}
@@ -169,14 +166,6 @@ public class JobBean {
 
 	public void setQualifications(Qualifications qualifications) {
 		this.qualifications = qualifications;
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
 	}
 
 	public Benefit getBenefit() {

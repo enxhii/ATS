@@ -1,5 +1,4 @@
 package ats.model;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +43,6 @@ public class Job implements Serializable {
 	@Column(name = "dateUpdated")
 	@CreationTimestamp
 	private Date dateUpdated;
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
@@ -56,21 +54,41 @@ public class Job implements Serializable {
 
 	@Column(name = "job_type")
 	private String job_type;
-
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "qualification_id", referencedColumnName = "idqualifications")
 	private Qualifications qualifications;
 
-	// bi-directional many-to-one association to Job
-	@OneToMany(mappedBy = "job", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Skill> skills;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idskill", referencedColumnName = "idskill")
+	private Skill skills;
+	
+	
+	public Skill getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Skill skills) {
+		this.skills = skills;
+	}
+
+	public List<Ranking> getRank() {
+		return rank;
+	}
+
+	public void setRank(List<Ranking> rank) {
+		this.rank = rank;
+	}
+
 	// bi-directional many-to-one association to Job
 	@OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
 	private List<CV> cv;
 
+	// bi-directional many-to-one association to Job
+	@OneToMany(mappedBy = "job", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Ranking> rank;
+	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinTable(name = "job_benefit", joinColumns = @JoinColumn(name = "id_job", referencedColumnName = "idjob"), inverseJoinColumns = @JoinColumn(name = "id_benefit", referencedColumnName = "id"))
-
 	private List<Benefit> benefits;
 
 	// bi-drectional many-to-one association to Address
@@ -166,14 +184,7 @@ public class Job implements Serializable {
 		this.qualifications = qualifications;
 	}
 
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
-
+	
 	public void setBenefits(List<Benefit> benefits) {
 		this.benefits = benefits;
 	}

@@ -1,6 +1,7 @@
 package ats.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,8 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,10 +35,13 @@ public class Skill implements Serializable {
 	@Column(name = "strengthLevel")
 
 	private String strengthLevel;
-	// bi-drectional many-to-one association to Address
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "job_id")
-	private Job job;
+
+	@OneToMany(mappedBy = "skills", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Job> job;
+
+	public void setJob(List<Job> job) {
+		this.job = job;
+	}
 
 	public Skill() {
 
@@ -71,7 +75,7 @@ public class Skill implements Serializable {
 		return strengthLevel;
 	}
 
-	public void setStrenghtLevel(String strengthLevel) {
+	public void setStrengthLevel(String strengthLevel) {
 		this.strengthLevel = strengthLevel;
 	}
 
@@ -79,15 +83,7 @@ public class Skill implements Serializable {
 		return serialVersionUID;
 	}
 
-	public void setStrengthLevel(String strengthLevel) {
-		this.strengthLevel = strengthLevel;
-	}
+	
 
-	public Job getJob() {
-		return job;
-	}
-
-	public void setJob(Job job) {
-		this.job = job;
-	}
+	
 }

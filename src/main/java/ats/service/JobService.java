@@ -11,7 +11,7 @@ import ats.model.Skill;
 import ats.model.User;
 
 public interface JobService {
-	void addJob(Job entity, User user, Address address, List<Skill> skills, Qualifications qualifications,
+	void addJob(Job entity, User user, Address address, Skill skills, Qualifications qualifications,
 			List<Benefit> benefits);
 
 	public List<JobCategory> listJobCategory();
