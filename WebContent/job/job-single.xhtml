@@ -1,0 +1,372 @@
+
+<html lang="" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>Job Details</title>
+	<f:metadata>
+		<f:viewParam name="idjob" value="#{applyBean.idjob}" />
+		<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
+
+	</f:metadata>
+
+	<meta charset="utf-8" />
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<meta name="description" content="" />
+
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="enxhi" />
+	<link rel="shortcut icon" href="ftco-32x32.png" />
+
+	<link rel="stylesheet" href="css/custom-bs.css" />
+	<link rel="stylesheet" href="css/jquery.fancybox.min.css" />
+	<link rel="stylesheet" href="css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="fonts/icomoon/style.css" />
+	<link rel="stylesheet" href="fonts/line-icons/style.css" />
+	<link rel="stylesheet" href="css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+
+<h:body id="top">
+	
+		<div id="overlayer" />
+
+		<div class="loader">
+
+			<div class="spinner-border text-primary" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+
+
+		<div class="site-wrap">
+			<section class="section-hero overlay inner-page bg-image"
+				style="background-image: url(images/resources/stable/images/logo.png);"
+				id="home-section">
+
+				<div class="container">
+
+					<div class="row">
+
+						<div class="col-md-7">
+
+							<h1 class="text-white font-weight-bold">
+								<h:outputText value="#{applyBean.job.title}" />
+							</h1>
+
+							<div class="custom-breadcrumbs">
+								<a href="resources/stable/index.xhtml">Home</a> <span
+									class="mx-2 slash">/</span> <a href="admin/job/jobList.xhtml">Jobs</a>
+								<span class="mx-2 slash">/</span> <span class="text-white"><strong><h:outputText
+											value="#{applyBean.job.jobCategory.type}" /></strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="site-section">
+
+				<div class="container">
+
+					<div class="row align-items-center mb-5">
+
+						<div class="col-lg-8 mb-4 mb-lg-0">
+
+							<div class="d-flex align-items-center">
+
+								<div class="border p-2 d-inline-block mr-3 rounded">
+									<img src="/free-template.co--jobboard/images/job_logo_5.jpg"
+										alt="logo" />
+								</div>
+
+								<div>
+
+									<h2>
+										<h:outputText value="#{applyBean.job.title}" />
+									</h2>
+
+									<div>
+										<span class="ml-0 mr-2 mb-2"><span
+											class="icon-briefcase mr-2" /> <h:outputText
+												value="#{applyBean.job.title}" /></span> <span class="m-2"><span
+											class="icon-room mr-2" /> <h:outputText
+												value="#{applyBean.job.address.country}" /> <h:outputText
+												value="#{applyBean.job.address.city}" /></span> <span class="m-2"><span
+											class="icon-clock-o mr-2" /><span class="text-primary"><h:outputText
+													value="#{applyBean.job.job_type}" /></span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+
+							<div class="row">
+								<div class="col-6">
+									<p:commandLink value="Apply now "
+										oncomplete="PF('AddFileDialog').show()"
+										update=":form:addFileDialog" class="btn btn-block btn-primary btn-md">
+									</p:commandLink>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="mb-5">
+								<figure class="mb-5">
+									<img src="images/job_single_img_1.jpg"
+										alt="Free Website Template by Free-Template.co"
+										class="img-fluid rounded" />
+								</figure>
+
+								<h3 class="h5 d-flex align-items-center mb-4 text-primary">
+									<span class="icon-align-left mr-3" />Job Description
+								</h3>
+
+								<p>
+									<h:outputText value="#{applyBean.job.description}" />
+								</p>
+
+							</div>
+
+							<div class="mb-5">
+
+								<h3 class="h5 d-flex align-items-center mb-4 text-primary">
+									<span class="icon-rocket mr-3" />Responsibilities
+								</h3>
+
+								<ul class="list-unstyled m-0 p-0">
+
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /> <span> <h:outputText
+												value="#{applyBean.job.skills.name}" /> <h:outputText
+												value="#{applyBean.job.skills.strengthLevel}" /> <h:outputText
+												value="#{applyBean.job.skills.experienceLevel}" />
+
+									</span></li>
+
+								</ul>
+							</div>
+
+							<div class="mb-5">
+
+								<h3 class="h5 d-flex align-items-center mb-4 text-primary">
+									<span class="icon-book mr-3" />Education + Experience
+								</h3>
+
+								<ul class="list-unstyled m-0 p-0">
+
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /> <h:outputText
+											value="#{applyBean.job.qualifications.educationLevel}" /></li>
+
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /><span><h:outputText
+												value="#{applyBean.job.qualifications.specialization}" /></span></li>
+
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /><span> <h:outputText
+												value="#{applyBean.job.skills.name}" /> <h:outputText
+												value="#{applyBean.job.skills.strengthLevel}" /> <h:outputText
+												value="#{applyBean.job.skills.experienceLevel}" />
+
+
+
+									</span></li>
+
+								</ul>
+							</div>
+
+							<div class="mb-5">
+
+								<h3 class="h5 d-flex align-items-center mb-4 text-primary">
+									<span class="icon-turned_in mr-3" />Other Benefits
+								</h3>
+
+								<ul class="list-unstyled m-0 p-0">
+
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /><span> <ui:repeat
+												value="#{applyBean.job.benefits}" var="r">
+
+												<h:outputText value="#{r.name}" />
+												<br />
+											</ui:repeat>
+									</span></li>
+
+								</ul>
+
+							</div>
+
+							<div class="row mb-5">
+
+								<div class="col-6">
+									<a href="#" class="btn btn-block btn-light btn-md"><span
+										class="icon-heart-o mr-2 text-danger" />Save Job</a>
+								</div>
+
+								<div class="col-6">
+									<a href="#" class="btn btn-block btn-primary btn-md">Apply
+										Now</a>
+										<p:commandLink value="Apply now "
+										oncomplete="PF('AddFileDialog').show()"
+										update=":form:addFileDialog">
+									</p:commandLink>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+
+							<div class="bg-light p-3 border rounded mb-4">
+
+								<h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+
+								<ul class="list-unstyled pl-3 mb-0">
+
+									<li class="mb-2"><strong class="text-black">Published
+											on:</strong> <h:outputText value="#{applyBean.job.dateUpdated}" /></li>
+
+
+									<li class="mb-2"><strong class="text-black">Employment
+											Status:</strong> <h:outputText value="#{applyBean.job.job_type}" /></li>
+
+									<li class="mb-2"><strong class="text-black">Experience:</strong>
+
+										<h:outputText value="#{applyBean.job.skills.name}" /></li>
+
+									<li class="mb-2"><strong class="text-black">Job
+											Location:</strong> <h:outputText
+											value="#{applyBean.job.address.country}" />/<h:outputText
+											value="#{applyBean.job.address.city}" /></li>
+
+									<li class="mb-2"><strong class="text-black">Salary:</strong>
+										Undefined</li>
+
+									<li class="mb-2"><strong class="text-black">Gender:</strong>
+										Any</li>
+
+								</ul>
+							</div>
+
+							<div class="bg-light p-3 border rounded">
+
+								<h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
+
+								<div class="px-3">
+									<a href="#" class="pt-3 pb-3 pr-3 pl-0"><span
+										class="icon-facebook" /></a> <a href="#"
+										class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter" /></a>
+									<a href="#" class="pt-3 pb-3 pr-3 pl-0"><span
+										class="icon-linkedin" /></a> <a href="#"
+										class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest" /></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+
+
+			<footer class="site-footer">
+				<a href="#top" class="smoothscroll scroll-top"> <span
+					class="icon-keyboard_arrow_up" />
+				</a>
+
+				<div class="container">
+
+					<div class="row mb-5">
+
+						<div class="col-6 col-md-3 mb-4 mb-md-0">
+
+							<h3>Company</h3>
+
+							<ul class="list-unstyled">
+
+								<li><a href="#">About Us</a></li>
+
+								<li><a href="#">Career</a></li>
+
+								<li><a href="#">Blog</a></li>
+
+								<li><a href="#">Resources</a></li>
+							</ul>
+						</div>
+
+
+
+						<div class="col-6 col-md-3 mb-4 mb-md-0">
+
+							<h3>Contact Us</h3>
+
+							<div class="footer-social">
+								<a href="#"><span class="icon-facebook" /></a> <a href="#"><span
+									class="icon-twitter" /></a> <a href="#"><span
+									class="icon-instagram" /></a> <a href="#"><span
+									class="icon-linkedin" /></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="row text-center">
+
+						<div class="col-12">
+
+							<p class="copyright">
+								<small class="block">© <script>
+									document.write(new Date().getFullYear());
+								</script>2019 <strong class="text-white">Jobboard</strong> Free Website
+									Template. All Rights Reserved. <br /> Designed &amp; Developed
+									by <a href="https://free-template.co/" target="_blank">Free-Template.co</a></small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+		<!-- SCRIPTS -->
+
+
+		<script src="js/jquery.min.js"></script>
+
+		<script src="js/bootstrap.bundle.min.js"></script>
+
+		<script src="js/isotope.pkgd.min.js"></script>
+
+		<script src="js/stickyfill.min.js"></script>
+
+		<script src="js/jquery.fancybox.min.js"></script>
+
+		<script src="js/jquery.easing.1.3.js"></script>
+
+
+		<script src="js/jquery.waypoints.min.js"></script>
+
+		<script src="js/jquery.animateNumber.min.js"></script>
+
+		<script src="js/owl.carousel.min.js"></script>
+
+
+		<script src="js/bootstrap-select.min.js"></script>
+
+
+		<script src="js/custom.js"></script>
+
+</h:body>
+<ui:include src="/admin/job/viewJob.xhtml"></ui:include>
+
+</html>

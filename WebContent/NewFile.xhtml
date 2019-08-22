@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+<h:outputStylesheet library="css" name="input.css"></h:outputStylesheet>
+		<title>User Information</title>
+	</h:head>
+<h:body>
+	<h:form>
+			<section class="site-section">
+	
+	<div class="col-lg-4">
+
+					<div class="row">
+						<div class="col-6">
+		<p:commandLink value="Apply now "
+			oncomplete="PF('AddFileDialog').show()" update=":form:addFileDialog"
+			class="btn btn-block btn-primary btn-md">
+		</p:commandLink>
+</div>
+</div>
+</div>
+</section>
+	</h:form>
+	</h:body>
+			<ui:include src="/admin/job/viewJob.xhtml"></ui:include>
+</html>
