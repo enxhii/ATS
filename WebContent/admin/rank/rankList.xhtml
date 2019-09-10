@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/components/homepagetemplate.xhtml">
+	<h:head>
+		<title>User Information</title>
+	</h:head>
+	<ui:define name="body" appendTo="@(body)">
+		<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
+
+
+		<h:form id="form">
+			<p:dataTable var="u" value="#{rankingBean.rank_list}" paginator="true"
+				style="margin-bottom:20px" id="rank" rows="10"
+				emptyMessage="No records found !">
+				<p:messages id="messages" />
+				<p:column headerText="Id">
+					<h:outputText value="#{u.id}" />
+				</p:column>
+		
+				<p:column headerText="Score">
+					<h:outputText value="#{u.score}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+		
+
+	</ui:define>
+</ui:composition>
+</html>

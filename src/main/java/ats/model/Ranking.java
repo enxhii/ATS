@@ -25,12 +25,24 @@ public class Ranking implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idranking;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "idjob")
 	private Job job;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idcv")
+	private CV cv;
+
 	public Job getJob() {
 		return job;
+	}
+
+	public CV getCv() {
+		return cv;
+	}
+
+	public void setCv(CV cv) {
+		this.cv = cv;
 	}
 
 	public Integer getIdranking() {
@@ -45,11 +57,11 @@ public class Ranking implements Serializable {
 		this.job = job;
 	}
 
-	public String getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(String score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 
@@ -58,5 +70,6 @@ public class Ranking implements Serializable {
 	}
 
 	@Column(name = "score")
-	private String score;
+	private double score;
+
 }

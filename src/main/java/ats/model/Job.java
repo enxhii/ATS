@@ -84,7 +84,7 @@ public class Job implements Serializable {
 	private List<CV> cv;
 
 	// bi-directional many-to-one association to Job
-	@OneToMany(mappedBy = "job", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
 	private List<Ranking> rank;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })

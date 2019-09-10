@@ -13,19 +13,24 @@
 		<p:dataGrid id="jobs" var="j" value="#{applyBean.jobs}" columns="3"
 			layout="grid" width="400" paginator="true">
 			<p:panel header="#{j.title}" style="text-align:center">
-					<p:graphicImage name="/job/#{j.title}.jpg" />
-					
-					<br />
-					<br />
-					<h:link outcome="/job/job-single.xhtml" value="More Details"
-						includeViewParams="true">
-						<f:param name="idjob" value="#{j.idjob}" />
-						<f:param name="title" value="#{j.title}" />
-					</h:link>
-					<br />
-					<br />
+				<p:graphicImage name="/job/#{j.title}.jpg" />
+
+				<br />
+				<h:link outcome="/job/job-single.xhtml" value="More Details"
+					includeViewParams="true">
+					<f:param name="idjob" value="#{j.idjob}" />
+					<f:param name="title" value="#{j.title}" />
+				</h:link>
+				<br />
+				
+				<h:link outcome="/admin/job/newapply.xhtml" value="Apply now"
+					includeViewParams="true">
+					<f:param name="idjob" value="#{j.idjob}" />
+					<f:param name="title" value="#{j.title}" />
+				</h:link>
 			</p:panel>
 		</p:dataGrid>
 	</h:form>
 </h:body>
+
 </html>

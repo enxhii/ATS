@@ -95,7 +95,8 @@ public class JobBean {
 		user.setId(userProfileBean.getUser().getId());
 
 		jobService.addJob(job, user, address, skill, qualifications, selectedBenefit);
-		
+		addMessage("You have succesfully published the job: " + job.getTitle());
+
 		job = new Job();
 		address = new Address();
 		skill = new Skill();

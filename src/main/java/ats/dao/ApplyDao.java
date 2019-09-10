@@ -12,13 +12,15 @@ import ats.model.Job;
 public class ApplyDao {
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	public void uploadCv(CV file, Job job) {
 		
 		file.setJob(job);
 		entityManager.persist(file);
+		
 	}
 
+	
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}

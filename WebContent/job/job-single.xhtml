@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 <html lang="" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -12,7 +13,6 @@
 		<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
 
 	</f:metadata>
-
 	<meta charset="utf-8" />
 
 	<meta name="viewport"
@@ -36,8 +36,8 @@
 	<link rel="stylesheet" href="css/style.css" />
 </h:head>
 
-<h:body id="top">
-	
+<h:body>
+	<h:form>
 		<div id="overlayer" />
 
 		<div class="loader">
@@ -85,8 +85,7 @@
 							<div class="d-flex align-items-center">
 
 								<div class="border p-2 d-inline-block mr-3 rounded">
-									<img src="/free-template.co--jobboard/images/job_logo_5.jpg"
-										alt="logo" />
+									<img src="/job/images/job_logo_5.jpg" alt="logo" />
 								</div>
 
 								<div>
@@ -115,7 +114,8 @@
 								<div class="col-6">
 									<p:commandLink value="Apply now "
 										oncomplete="PF('AddFileDialog').show()"
-										update=":form:addFileDialog" class="btn btn-block btn-primary btn-md">
+										update=":form1:addFileDialog"
+										class="btn btn-block btn-primary btn-md">
 									</p:commandLink>
 								</div>
 							</div>
@@ -125,8 +125,7 @@
 						<div class="col-lg-8">
 							<div class="mb-5">
 								<figure class="mb-5">
-									<img src="images/job_single_img_1.jpg"
-										alt="Free Website Template by Free-Template.co"
+									<img src="images/job_single_img_1.jpg" alt="job"
 										class="img-fluid rounded" />
 								</figure>
 
@@ -135,7 +134,7 @@
 								</h3>
 
 								<p>
-									<h:outputText value="#{applyBean.job.description}" />
+									<h:outputText value="#{applyBean.job.description}"  escape="false" />
 								</p>
 
 							</div>
@@ -207,23 +206,6 @@
 
 								</ul>
 
-							</div>
-
-							<div class="row mb-5">
-
-								<div class="col-6">
-									<a href="#" class="btn btn-block btn-light btn-md"><span
-										class="icon-heart-o mr-2 text-danger" />Save Job</a>
-								</div>
-
-								<div class="col-6">
-									<a href="#" class="btn btn-block btn-primary btn-md">Apply
-										Now</a>
-										<p:commandLink value="Apply now "
-										oncomplete="PF('AddFileDialog').show()"
-										update=":form:addFileDialog">
-									</p:commandLink>
-								</div>
 							</div>
 						</div>
 
@@ -366,7 +348,8 @@
 
 		<script src="js/custom.js"></script>
 
-</h:body>
-<ui:include src="/admin/job/viewJob.xhtml"></ui:include>
+	</h:form>
+	<ui:include src="/admin/job/viewJob.xhtml"></ui:include>
 
+</h:body>
 </html>

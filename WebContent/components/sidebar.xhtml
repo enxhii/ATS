@@ -33,6 +33,10 @@
 				rendered="#{userProfileBean.hasRoleAdmin('ADMIN')}"
 				style="text-decoration: none;" />
 			<br /> <br />
+			
+			<h:link value="Rank applicants" outcome="/admin/rank/rankList"
+				style="text-decoration: none;" />
+			<br /> <br />
 			<h:link value="Enable User " outcome="/admin/enableUser"
 				rendered="#{userProfileBean.hasRoleAdmin('ADMIN')}"
 				style="text-decoration: none;"></h:link>

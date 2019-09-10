@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:metadata>
+		<f:viewParam name="idjob" value="#{applyBean.idjob}" />
+		<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
+
+	</f:metadata>
+</h:head>
+
+<h:body>
+	<h:form id="ffform">
+	<p:commandLink value="Apply now "
+		oncomplete="PF('AddFileDialog').show()" update=":form1:addFileDialog"
+		class="btn btn-block btn-primary btn-md">
+	</p:commandLink>
+	</h:form>
+	<ui:include src="/admin/job/viewJob.xhtml"></ui:include>
+
+</h:body>
+
+</html>

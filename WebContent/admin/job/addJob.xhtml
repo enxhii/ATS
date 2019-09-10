@@ -16,10 +16,9 @@
 		<h:outputStylesheet library="css" name="input.css"></h:outputStylesheet>
 		<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
 
-		<p:growl id="growl" showDetail="true" life="5000" />
-
 		<h:form id="form">
-
+			<p:messages id="messages" showDetail="true" closable="true">
+			</p:messages>
 			<h3 style="margin-top: 0">Post a Job</h3>
 
 
@@ -44,7 +43,7 @@
 						</p:selectOneMenu>
 						<h:outputText value=" Job Description : " />
 						<p:editor id="editor" widgetVar="editorWidget"
-							value="#{jobbean.job.description}" width="600" />
+							value="#{jobbean.job.description}" width="600"  />
 
 
 						<p:commandButton value="Clear" type="button"
@@ -133,7 +132,7 @@
 			</p:accordionPanel>
 
 			<p:commandButton value="Publish Job" id="button"
-				action="#{jobbean.addJob}" update=":form,:growl" icon="pi pi-save"
+				action="#{jobbean.addJob}" update=":form" icon="pi pi-save"
 				style="background: #c43636; color: white;">
 				<p:resetInput target="form" />
 			</p:commandButton>

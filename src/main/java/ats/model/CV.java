@@ -13,12 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "cv")
+@NamedQuery(name = "findByName", query = "select j from CV j where j.name= :name")
 public class CV implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +31,7 @@ public class CV implements Serializable {
 	@Column(name = "date_applied")
 	@CreationTimestamp
 	private Date dateApplied;
-	@Column(name = "name")
+	@Column(name = "name", unique=true)
 	private String name;
 	
 	@Lob

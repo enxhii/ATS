@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,7 @@ import ats.model.CV;
 import ats.model.Job;
 import ats.model.Qualifications;
 import ats.model.Skill;
+import ats.service.CvParserService;
 import ats.service.CvService;
 import ats.service.JobService;
 
@@ -39,6 +41,10 @@ public class ApplyBean {
 
 	@ManagedProperty(value = "#{cvServiceImpl}")
 	private CvService cvService;
+
+	@ManagedProperty(value="#{cvParserImplService}")
+	private CvParserService cv_service;
+
 	private List<Job> jobs;
 	private Job job;
 	final static Logger LOGGER = LogManager.getLogger(ApplyBean.class);
@@ -48,6 +54,7 @@ public class ApplyBean {
 	private Benefit benefit;
 	private Skill skill;
 	private Qualifications qualifications;
+
 
 	private static final String PF_ADDFILE_DIALOG_HIDE = "PF('AddFileDialog').hide()";
 	private static final String PF_ADDFILE_DIALOG_SHOW = "PF('AddFileDialog').show()";
@@ -60,26 +67,65 @@ public class ApplyBean {
 		file = new CV();
 	}
 
+	/*
+	 * public void apply(FileUploadEvent event) throws Exception {
+	 * file.setName(event.getFile().getFileName());
+	 * file.setData(event.getFile().getContents()); Path folder =
+	 * Paths.get("C:/Users/pc/eclipse-workspace/ATS/resumes"); String filename =
+	 * FilenameUtils.getBaseName(event.getFile().getFileName()); String extension =
+	 * FilenameUtils.getExtension(event.getFile().getFileName()); Path fileToFolder
+	 * = Files.createTempFile(folder, filename + "-", "." + extension); try
+	 * (InputStream input = event.getFile().getInputstream()) { Files.copy(input,
+	 * fileToFolder, StandardCopyOption.REPLACE_EXISTING); } cvService.addCv(file,
+	 * job); cv_service.extractTextFromPdf(job.getIdjob(),file.getName());
+	 * addMessage("You have succesfully applied for the position " +
+	 * job.getTitle()); executeScript(PF_ADDFILE_DIALOG_HIDE);
+	 * 
+	 * 
+	 * }
+	 */
 	public void apply(FileUploadEvent event) throws IOException {
+	
 		file.setName(event.getFile().getFileName());
 		file.setData(event.getFile().getContents());
-		Path folder = Paths.get("C:/Users/pc/eclipse-workspace/ATS/resumes");
+		
 		String filename = FilenameUtils.getBaseName(event.getFile().getFileName());
 		String extension = FilenameUtils.getExtension(event.getFile().getFileName());
-		Path fileToFolder = Files.createTempFile(folder, filename + "-", "." + extension);
+		Path folder = Paths.get("C:/Users/pc/eclipse-workspace/ATS/resumes/" + filename + "." + extension);
+		Path fileToFolder = Files.createFile(folder); //shif, ti ben create file edhe i kalon pathin e foldeit :P car ti kaloj
+			
 		try (InputStream input = event.getFile().getInputstream()) {
 			Files.copy(input, fileToFolder, StandardCopyOption.REPLACE_EXISTING);
 		}
-		cvService.addCv(file, job);
+		
+		cvService.addCv(file, job); // po ky job nga vjen nga front /job whste ok
+		
+		try {
+			cv_service.extractTextFromPdf(job.getIdjob(), file.getName());
+			//cv_service.print();
+			
+			System.out.println("job id" + job.getIdjob() + file.getName());// as ket
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		addMessage("You have succesfully applied for the position " + job.getTitle());
 		executeScript(PF_ADDFILE_DIALOG_HIDE);
 
-
 	}
 
-	public void onLinkClick(){
-	    executeScript(PF_ADDFILE_DIALOG_SHOW);
+	public CvParserService getCv_service() {
+		return cv_service;
 	}
+
+	public void setCv_service(CvParserService cv_service) {
+		this.cv_service = cv_service;
+	}
+
+	public void onLinkClick() {
+		executeScript(PF_ADDFILE_DIALOG_SHOW);
+	}
+
 	public UploadedFile getUpload() {
 		return upload;
 	}
@@ -145,7 +191,8 @@ public class ApplyBean {
 	public CV getFile() {
 		return file;
 	}
-public Skill getSkill() {
+
+	public Skill getSkill() {
 		return skill;
 	}
 
@@ -159,7 +206,8 @@ public Skill getSkill() {
 
 	public void setQualifications(Qualifications qualifications) {
 		this.qualifications = qualifications;
-	}	
+	}
+
 	public Benefit getBenefit() {
 		return benefit;
 	}
@@ -175,6 +223,7 @@ public Skill getSkill() {
 	public void setIdjob(Integer idjob) {
 		this.idjob = idjob;
 	}
+
 	private void executeScript(String script) {
 		requestContext().execute(script);
 	}
