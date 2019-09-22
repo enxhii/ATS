@@ -1,119 +1,66 @@
-<ui:composition lang="" xmlns="http://www.w3.org/1999/xhtml"
+<html lang="" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
+	<ui:composition>
+	<h:head>
 
-<title>Login now</title>
+		<title>Login now</title>
 
-<meta charset="utf-8" />
+		<meta charset="utf-8" />
 
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<meta name="description" content="" />
+		<meta name="description" content="" />
 
-<meta name="keywords" content="" />
+		<meta name="keywords" content="" />
 
-<meta name="author" content="Free-Template.co" />
-<link rel="shortcut icon" href="ftco-32x32.png" />
+		<meta name="author" content="Free-Template.co" />
+		<link rel="shortcut icon" href="ftco-32x32.png" />
 
-<link rel="stylesheet" href="css/custom-bs.css" />
-<link rel="stylesheet" href="css/jquery.fancybox.min.css" />
-<link rel="stylesheet" href="css/bootstrap-select.min.css" />
-<link rel="stylesheet" href="fonts/icomoon/style.css" />
-<link rel="stylesheet" href="fonts/line-icons/style.css" />
-<link rel="stylesheet" href="css/owl.carousel.min.css" />
-<link rel="stylesheet" href="css/animate.min.css" />
-<link rel="stylesheet" href="css/quill.snow.css" />
+		<link rel="stylesheet" href="css/custom-bs.css" />
+		<link rel="stylesheet" href="css/jquery.fancybox.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-select.min.css" />
+		<link rel="stylesheet" href="fonts/icomoon/style.css" />
+		<link rel="stylesheet" href="fonts/line-icons/style.css" />
+		<link rel="stylesheet" href="css/owl.carousel.min.css" />
+		<link rel="stylesheet" href="css/animate.min.css" />
+		<link rel="stylesheet" href="css/quill.snow.css" />
 
-<link rel="stylesheet" href="css/style.css" />
-</h:head>
-<h:body id="top1">
-	<h:form id="form">
-	<p:dialog id="LoginDialog" header="Login Now"
-			widgetVar="LoginDialog" showEffect="fade" hideEffect="fade">
-		<div id="overlayer" />
-
-		<div class="loader">
-
-			<div class="spinner-border text-primary" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>
+		<link rel="stylesheet" href="css/style.css" />
+	</h:head>
+		<p:dialog id="LoginDialog" header="Login Now" widgetVar="LoginDialog"
+			showEffect="fade" hideEffect="fade" appendTo="@(body)" modal="true" resizable="true" >
+			<h:form id="form">
 
 
-		<div class="site-wrap">
+				<p:messages id="messages" />
+				<label class="text-black" for="fusername">Username </label>
 
-			<div class="site-mobile-menu site-navbar-target">
-
-				<div class="site-mobile-menu-header">
-
-					<div class="site-mobile-menu-close mt-3">
-						<span class="icon-close2 js-menu-toggle" />
-					</div>
-				</div>
-
-				<div class="site-mobile-menu-body" />
-			</div>
+				<p:inputText id="username" value="#{login.username}" required="true"
+					requiredMessage="Username is mandatory" class="form-control">
+					<p:watermark for="username" value="Username" />
+				</p:inputText>
 
 
+				<label class="text-black" for="fname">Password</label>
+				<p:password id="password" value="#{login.password}" required="true"
+					class="form-control" requiredMessage="Password is mandatory">
+					<p:watermark for="password" value="Password" />
+				</p:password>
 
-			<div class="container">
 
-				<div class="row">
+				<p:commandButton value="Login" icon="ui-icon-star"
+					action="#{login.submit}" ajax="false"
+					class="btn px-4 btn-primary text-white">
+				</p:commandButton>
 
-
-
-					<div class="col-lg-6">
-
-						<h2 class="mb-4">Log In Now</h2>
-						<form action="#" class="p-4 border rounded">
-
-							<div class="row form-group">
-
-								<div class="col-md-12 mb-3 mb-md-0">
-
-									<p:messages id="messages" />
-									<label class="text-black" for="fusername">Username </label>
-
-									<p:inputText id="username" value="#{login.username}"
-										required="true" requiredMessage="Username is mandatory"
-										class="form-control">
-										<p:watermark for="username" value="Username" />
-									</p:inputText>
-								</div>
-							</div>
-
-							<div class="row form-group mb-4">
-
-								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="text-black" for="fname">Password</label>
-									<p:password id="password" value="#{login.password}"
-										required="true" class="form-control"
-										requiredMessage="Password is mandatory">
-										<p:watermark for="password" value="Password" />
-									</p:password>
-								</div>
-							</div>
-
-							<div class="row form-group">
-
-								<div class="col-md-12">
-									<p:commandButton value="Login" icon="ui-icon-star"
-										action="#{login.submit}" ajax="false"
-										class="btn px-4 btn-primary text-white">
-									</p:commandButton>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-
-		</div>
+			</h:form>
 		</p:dialog>
+
+
 		<!-- SCRIPTS -->
 
 		<script src="js/jquery.min.js"></script>
@@ -143,6 +90,5 @@
 
 
 		<script src="js/custom.js"></script>
-	</h:form>
-</h:body>
 </ui:composition>
+</html>

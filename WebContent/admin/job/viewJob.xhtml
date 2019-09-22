@@ -6,28 +6,31 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:head>
-		<f:metadata>
-			<f:viewParam name="idjob" value="#{applyBean.idjob}" />
-			<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
+<h:head>
+	<f:metadata>
+		<f:viewParam name="idjob" value="#{applyBean.idjob}" />
+		<f:event listener="#{applyBean.init()}" type="preRenderView"></f:event>
 
-		</f:metadata>
-	</h:head>
+	</f:metadata>
+</h:head>
 <h:body>
-	<h:form id="form1" enctype="multipart/form-data">
+	<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
 
+	<h:form id="form1" enctype="multipart/form-data">
+		<p:messages id="messages" showDetail="true" closable="true">
+		</p:messages>
 		<p:dialog id="addFileDialog" header="Apply Now" appendToBody="true"
 			widgetVar="AddFileDialog" showEffect="fade" hideEffect="fade">
 			<h:outputText value="#{applyBean.job.title}">
 			</h:outputText>
-			<p:messages id="messag" />
+
 
 			<p:fileUpload id="up" fileUploadListener="#{applyBean.apply}"
 				value="#{applyBean.upload}" mode="advanced" skinSimple="true"
 				required="true"
 				requiredMessage="Please insert your CV to apply for this position"
-				sizeLimit="100000" fileLimit="1"
-				allowTypes="/(\.|\/)(pdf|doc|txt)$/" update="up"
+				sizeLimit="1000000000000000000" fileLimit="1"
+				allowTypes="/(\.|\/)(pdf)$/" update="up"
 				invalidFileMessage="Invalid file type"
 				messageTemplate="Can't upload file   #{applyBean.file.name} It must be a .doc/pdf/txt file" />
 		</p:dialog>

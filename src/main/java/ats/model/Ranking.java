@@ -71,5 +71,16 @@ public class Ranking implements Serializable {
 
 	@Column(name = "score")
 	private double score;
+	
+	@Column(name = "match_skill")
+	private String  match_skill;
+
+	public String getMatch_skill() {
+		return match_skill;
+	}
+
+	public void setMatch_skill(String match_skill) {
+		this.match_skill = match_skill;
+	}
 
 }

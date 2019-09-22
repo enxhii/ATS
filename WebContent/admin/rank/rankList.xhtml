@@ -13,21 +13,25 @@
 
 
 		<h:form id="form">
-			<p:dataTable var="u" value="#{rankingBean.rank_list}" paginator="true"
-				style="margin-bottom:20px" id="rank" rows="10"
+			<p:dataTable var="u" value="#{rankingBean.rank_list}"
+				paginator="true" style="margin-bottom:20px" id="rank" rows="10"
 				emptyMessage="No records found !">
 				<p:messages id="messages" />
-				<p:column headerText="Id">
-					<h:outputText value="#{u.id}" />
+				<p:column headerText="Position Applied :">
+					<h:outputText value="#{u.job.title}" />
 				</p:column>
-		
+				<p:column headerText="Cv Name :">
+					<h:outputText value="#{u.cv.name}" />
+				</p:column>
 				<p:column headerText="Score">
 					<h:outputText value="#{u.score}" />
 				</p:column>
-
+<p:column headerText="Matched skills">
+					<h:outputText value="#{u.match_skill}" />
+				</p:column>
 			</p:dataTable>
 		</h:form>
-		
+
 
 	</ui:define>
 </ui:composition>

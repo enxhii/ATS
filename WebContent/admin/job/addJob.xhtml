@@ -32,7 +32,7 @@
 						<p:inputText id="title" value="#{jobbean.job.title}"
 							required="true"
 							requiredMessage="Job position is required and must have 3 or more letters.">
-							<f:validateLength minimum="2" maximum="20" />
+							<f:validateLength minimum="2" maximum="50" />
 						</p:inputText>
 						<h:outputText value=" Job Category : " />
 						<p:selectOneMenu value="#{jobbean.job.jobCategory}"
@@ -77,7 +77,7 @@
 						<p:inputText id="name" value="#{jobbean.skill.name}"
 							required="true"
 							requiredMessage=" Skill name  is required and must have 3 or more letters.">
-							<f:validateLength minimum="3" maximum="20" />
+							<f:validateLength minimum="3" maximum="50" />
 						</p:inputText>
 						<p:selectOneMenu id="level"
 							value="#{jobbean.skill.experienceLevel}" style="width:150px">

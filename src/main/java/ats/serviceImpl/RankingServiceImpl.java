@@ -11,27 +11,29 @@ import ats.model.CV;
 import ats.model.Job;
 import ats.model.Ranking;
 import ats.service.RankingService;
+
 @Transactional
 @Service
 public class RankingServiceImpl implements RankingService {
-@Autowired
-private RankingDao rankingDao;
+	@Autowired
+	private RankingDao rankingDao;
+
 	public RankingDao getRankingDao() {
-	return rankingDao;
-}
+		return rankingDao;
+	}
 
-public void setRankingDao(RankingDao rankingDao) {
-	this.rankingDao = rankingDao;
-}
-
-	@Override
-	public void addRanking(Job job, CV cv, double score) {
-rankingDao.addRanking(job, cv, score);
+	public void setRankingDao(RankingDao rankingDao) {
+		this.rankingDao = rankingDao;
 	}
 
 	@Override
-	public List<Ranking> listRanking() {		
-		
+	public void addRanking(Job job, CV cv, double score, String same_skill) {
+		rankingDao.addRanking(job, cv, score, same_skill);
+	}
+
+	@Override
+	public List<Ranking> listRanking() {
+
 		return rankingDao.listRanking();
 	}
 

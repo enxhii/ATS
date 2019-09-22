@@ -7,7 +7,7 @@ import ats.model.Job;
 import ats.model.Ranking;
 
 public interface RankingService {
-	public void addRanking(Job job,CV cv,double score) ;
+	public void addRanking(Job job,CV cv,double score,String same_skill) ;
 	public List<Ranking> listRanking() ;
 	public Ranking getRankingByJobId(Integer id) ;
 	public Ranking getRankingByCVId(Integer id) ;

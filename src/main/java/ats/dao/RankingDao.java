@@ -20,12 +20,13 @@ public class RankingDao {
 	private EntityManager entityManager;
 	final static Logger LOGGER = LogManager.getLogger(JobDao.class);
 
-	public void addRanking(Job job,CV cv,double score) {
+	public void addRanking(Job job,CV cv,double score ,String same_skill) {
 		try {
 			Ranking ranking = new Ranking();
 			ranking.setJob(job);
 			ranking.setScore(score);
 			ranking.setCv(cv);
+			ranking.setMatch_skill(same_skill);
 			entityManager.persist(ranking);
 			LOGGER.info("Ranking Inserted");
 
@@ -38,7 +39,7 @@ public class RankingDao {
 	public List<Ranking> listRanking() {
 		try {
 			LOGGER.debug("Getting result from Ranking ");
-			String sql = "SELECT r FROM ranking  r";
+			String sql = "SELECT r FROM Ranking  r";
 			LOGGER.debug("Fetching result from Ranking");
 			@SuppressWarnings("unchecked")
 			List<Ranking> jobCategoryts = entityManager.createQuery(sql).getResultList();
