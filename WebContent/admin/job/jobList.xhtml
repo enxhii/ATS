@@ -10,8 +10,14 @@
 <h:body>
 	<h:outputStylesheet library="css" name="datatable.css"></h:outputStylesheet>
 	<h:form id="form">
+	
+	<div class="custom-breadcrumbs">
+								<a href="resources/stable/index.xhtml">Home</a> <span
+									class="mx-2 slash"></span> <a href="admin/job/jobList.xhtml">Jobs</a>
+								<span class="mx-2 slash"></span> 
+							</div>
 		<p:dataGrid id="jobs" var="j" value="#{applyBean.jobs}" columns="3"
-			layout="grid" width="400" paginator="true">
+			layout="grid" width="400">
 			<p:panel header="#{j.title}" style="text-align:center">
 				<p:graphicImage name="/job/#{j.title}.jpg" />
 

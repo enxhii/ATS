@@ -71,8 +71,8 @@ public class JobDao {
 			List<Job> jobs = entityManager.createQuery(sql).getResultList();
 			return jobs;
 		} catch (Exception e) {
-			LOGGER.info(e);
-			e.printStackTrace();
+			LOGGER.info("Job Dao Class problem");
+			
 		}
 		return null;
 	}
@@ -80,7 +80,6 @@ public class JobDao {
 	public Job getJobById(Integer id) {
 		try {
 			String query = " select j from Job j  where j.idjob=?1 ";
-			LOGGER.debug(entityManager.createQuery(query, Job.class).setParameter(1, id).getSingleResult());
 			return entityManager.createQuery(query, Job.class).setParameter(1, id).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();

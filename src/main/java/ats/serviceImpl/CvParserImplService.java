@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.LogManager;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
-
 import ats.dao.CVDao;
 import ats.dao.JobDao;
 import ats.dao.RankingDao;
@@ -100,7 +100,10 @@ public class CvParserImplService implements CvParserService {
 		java.util.List<ExperienceModel> cv_skills_list = cv_info.getEksperienca();
 
 		String all_exp = "";
-
+		double cv_skill_size_list = 0;
+		double totalSize=0;
+		double job_skill_size = 0;
+		double sameSkill = 0;
 		for (int i = 0; i < cv_skills_list.size(); i++) {
 			all_exp += cv_skills_list.get(i).getPershkrimi();
 		}
@@ -110,46 +113,43 @@ public class CvParserImplService implements CvParserService {
 
 		System.out.println(cvNames[0] + "//skillset qe marrim nga cv splittted");
 
-		double totalSize = cvNames.length + nameSpans.length;
-		ArrayList<String> sameSkills = new ArrayList<>();
-
 		String cv_skill = "";
 		for (Span cv_skill_name : cvNames) {
 			for (int i = cv_skill_name.getStart(); i < cv_skill_name.getEnd(); i++) {
 				cv_skill = cv_skill + cv_info_split[i] + " ";
 			}
-			System.out.println(cv_skill + "\n" + cv_skill_name.getProb());
 
 		}
-
+		String[] split_cv_skill=cv_skill.split("");
+		List<String> final_split_cv = new ArrayList<String>(Arrays.asList(split_cv_skill));
+		final_split_cv.replaceAll(String::toLowerCase);
 		String job_skill = "";
-
-		/*
-		 * for(Span job_skill_name: nameSpans){ for (int i=job_skill_name.getStart() ;
-		 * i<job_skill_name.getEnd();i++) { job_skill=job_skill + job_descp_list[i] +
-		 * " " ; } System.out.println(job_skill + "\t" + job_skill_name.getProb() );
-		 * 
-		 * }
-		 */
+		
 		// nameSpans contain all the possible entities detected
 		for (Span s : nameSpans) {
 			for (int i = s.getStart(); i < s.getEnd(); i++) {
 				job_skill = job_skill + job_descp_list[i] + " ";
 			}
-			if ((cv_skill).contains(job_skill)) {
-				sameSkills.add(job_skill); // ketu do te ruhen te perbashketat
-			}
+			
+			String[] split_job=job_skill.split("");
+			List<String> final_split_job = new ArrayList<String>(Arrays.asList(split_job));
+			final_split_job.replaceAll(String::toLowerCase);
+			job_skill_size=final_split_job.size();
+			cv_skill_size_list=final_split_cv.size();
+			 totalSize = cv_skill_size_list + job_skill_size;
+			final_split_cv.retainAll(final_split_job);
+			sameSkill=final_split_cv.size();
+			
 		}
-		System.out.println(cv_skill  + "CV SKILL");
-		System.out.println(job_skill  + "JOB SKILL");
+		
+		System.out.println(cv_skill_size_list  + "CV SKILL");
+		System.out.println(job_skill_size + "JOB SKILL");
 
-		System.out.println(sameSkills.size() + "TE PERBASHKETAT");
+		System.out.println(sameSkill + "TE PERBASHKETAT");
 
-		System.out.println(Arrays.asList(cv_skill).contains(job_skill) + "Contains or not ");
-		double sameSkill = sameSkills.size();
 		double difference_total = totalSize - sameSkill;
 		System.out.println("Totali aftesive " + totalSize + "Diferenca" + difference_total + "TE Perbashketat "
-				+ sameSkills.size());
+				+ sameSkill);
 		double difference_score = ((difference_total / totalSize) * 100); // sa nuk jane ne %
 		System.out.println(((19 / 24) * 100) + "DIFFERENCE SCORE NE % ");
 		System.out.println((difference_total / totalSize) * 100 + "DIFFERENCE SCORE NE % ");
@@ -161,8 +161,8 @@ public class CvParserImplService implements CvParserService {
 
 		CV cv_from_db = cvDao.getCvByName(cv_name);
 		String insert_sameSkill = "";
-		for (int i = 0; i < sameSkills.size(); i++) {
-			insert_sameSkill = insert_sameSkill + sameSkills.get(i);
+		for (int i = 0; i < final_split_cv.size(); i++) {
+			insert_sameSkill = insert_sameSkill + final_split_cv.get(i);
 
 		}
 		rankRepo.addRanking(job_descp, cv_from_db, score, insert_sameSkill);

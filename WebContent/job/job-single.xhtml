@@ -6,7 +6,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-
 	<title>Job Details</title>
 	<f:metadata>
 		<f:viewParam name="idjob" value="#{applyBean.idjob}" />
@@ -49,10 +48,8 @@
 
 
 		<div class="site-wrap">
-			<section class="section-hero overlay inner-page bg-image"
-				style="background-image: url(images/resources/stable/images/logo.png);"
-				id="home-section">
-
+			
+			
 				<div class="container">
 
 					<div class="row">
@@ -65,15 +62,13 @@
 
 							<div class="custom-breadcrumbs">
 								<a href="resources/stable/index.xhtml">Home</a> <span
-									class="mx-2 slash">/</span> <a href="admin/job/jobList.xhtml">Jobs</a>
-								<span class="mx-2 slash">/</span> <span class="text-white"><strong><h:outputText
-											value="#{applyBean.job.jobCategory.type}" /></strong></span>
+									class="mx-2 slash"></span> <a href="admin/job/jobList.xhtml">Jobs</a>
+								<span class="mx-2 slash"></span> <h:outputText
+											value="#{applyBean.job.jobCategory.type}" style="color:  #99ff33;"/>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-
 			<section class="site-section">
 
 				<div class="container">
@@ -85,7 +80,7 @@
 							<div class="d-flex align-items-center">
 
 								<div class="border p-2 d-inline-block mr-3 rounded">
-									<img src="/job/images/job_logo_5.jpg" alt="logo" />
+									<img src="images/job2.jpg" alt="logo" />
 								</div>
 
 								<div>
@@ -99,7 +94,8 @@
 											class="icon-briefcase mr-2" /> <h:outputText
 												value="#{applyBean.job.title}" /></span> <span class="m-2"><span
 											class="icon-room mr-2" /> <h:outputText
-												value="#{applyBean.job.address.country}" /> <h:outputText
+												value="#{applyBean.job.address.country}" /><h:outputText
+												value="/" /> <h:outputText
 												value="#{applyBean.job.address.city}" /></span> <span class="m-2"><span
 											class="icon-clock-o mr-2" /><span class="text-primary"><h:outputText
 													value="#{applyBean.job.job_type}" /></span></span>
@@ -112,29 +108,24 @@
 
 							<div class="row">
 								<div class="col-6">
-									<p:commandLink value="Apply now "
+<p:commandLink value="Apply now "
 										oncomplete="PF('AddFileDialog').show()"
 										update=":form1:addFileDialog"
 										class="btn btn-block btn-primary btn-md">
-									</p:commandLink>
-								</div>
+									</p:commandLink>								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="mb-5">
-								<figure class="mb-5">
-									<img src="images/job_single_img_1.jpg" alt="job"
-										class="img-fluid rounded" />
-								</figure>
-
 								<h3 class="h5 d-flex align-items-center mb-4 text-primary">
 									<span class="icon-align-left mr-3" />Job Description
 								</h3>
 
 								<p>
-									<h:outputText value="#{applyBean.job.description}"  escape="false" />
+									<h:outputText value="#{applyBean.job.description}"
+										escape="false" />
 								</p>
 
 							</div>
@@ -149,8 +140,19 @@
 
 									<li class="d-flex align-items-start mb-2"><span
 										class="icon-check_circle mr-2 text-muted" /> <span> <h:outputText
-												value="#{applyBean.job.skills.name}" /> <h:outputText
-												value="#{applyBean.job.skills.strengthLevel}" /> <h:outputText
+												value="Skill" />:<h:outputText
+												value="#{applyBean.job.skills.name}" /> <br />
+									</span></li>
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /> <span> 
+										<h:outputText
+												value="Skill Strength Level" />:<h:outputText
+												value="#{applyBean.job.skills.strengthLevel}" /> <br />
+									</span></li>
+									<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /> <span> 
+										<h:outputText
+												value="Experience Level" />:<h:outputText
 												value="#{applyBean.job.skills.experienceLevel}" />
 
 									</span></li>
@@ -167,18 +169,33 @@
 								<ul class="list-unstyled m-0 p-0">
 
 									<li class="d-flex align-items-start mb-2"><span
-										class="icon-check_circle mr-2 text-muted" /> <h:outputText
-											value="#{applyBean.job.qualifications.educationLevel}" /></li>
+										class="icon-check_circle mr-2 text-muted" /> <span> <h:outputText
+											value="Education Level" />: <h:outputText
+											value="#{applyBean.job.qualifications.educationLevel}" /></span></li>
 
 									<li class="d-flex align-items-start mb-2"><span
-										class="icon-check_circle mr-2 text-muted" /><span><h:outputText
+										class="icon-check_circle mr-2 text-muted" /><span> <h:outputText
+												value="Specialization in" />: <h:outputText
 												value="#{applyBean.job.qualifications.specialization}" /></span></li>
 
 									<li class="d-flex align-items-start mb-2"><span
 										class="icon-check_circle mr-2 text-muted" /><span> <h:outputText
-												value="#{applyBean.job.skills.name}" /> <h:outputText
-												value="#{applyBean.job.skills.strengthLevel}" /> <h:outputText
-												value="#{applyBean.job.skills.experienceLevel}" />
+												value="Skills" />: <h:outputText
+												value="#{applyBean.job.skills.name}" /> <br /> 
+																					</span></li>
+												
+												<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /> <span><h:outputText
+												value="Strength Level" />: <h:outputText
+												value="#{applyBean.job.skills.strengthLevel}" /> <br /> 
+																					</span></li>
+																					
+										<li class="d-flex align-items-start mb-2"><span
+										class="icon-check_circle mr-2 text-muted" /><span>
+												<h:outputText
+												value="Experience Level" />:<h:outputText
+												value="#{applyBean.job.skills.experienceLevel}" /> <br />
+
 
 
 
@@ -310,9 +327,8 @@
 							<p class="copyright">
 								<small class="block">© <script>
 									document.write(new Date().getFullYear());
-								</script>2019 <strong class="text-white">Jobboard</strong> Free Website
-									Template. All Rights Reserved. <br /> Designed &amp; Developed
-									by <a href="https://free-template.co/" target="_blank">Free-Template.co</a></small>
+								</script> <strong class="text-white"></strong> <br /> Designed &amp;
+									Developed by <a href="https://stable.com/" target="_blank">Stable</a></small>
 							</p>
 						</div>
 					</div>
@@ -320,7 +336,8 @@
 			</footer>
 
 		</div>
-		<!-- SCRIPTS -->
+		
+<!-- SCRIPTS -->
 
 
 		<script src="js/jquery.min.js"></script>
@@ -348,7 +365,9 @@
 
 		<script src="js/custom.js"></script>
 
+
 	</h:form>
+	
 	<ui:include src="/admin/job/viewJob.xhtml"></ui:include>
 
 </h:body>
